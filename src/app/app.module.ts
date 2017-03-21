@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { MDLDirective } from './mdl.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MDLDirective
   ],
   imports: [
     BrowserModule,

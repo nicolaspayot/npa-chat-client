@@ -5,11 +5,17 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { MDLDirective } from './mdl.directive';
+import { MessageListComponent } from './message/message-list.component';
+import { MessageComponent } from './message/message.component';
+import { InputComponent } from './input/input.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MDLDirective
+    MDLDirective,
+    MessageListComponent,
+    MessageComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,

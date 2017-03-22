@@ -8,81 +8,12 @@
 
   <main class="mdl-layout__content">
 
-    <div class="message">
-      <img class="avatar" src="./assets/img/eddard.png" alt="Avatar" />
-      <div class="message-content">
-        <div>
-          <span class="sender">eddard</span>
-          <span class="timestamp">00:00 AM</span>
-        </div>
-        <div class="message-text">
-          The man who passes the sentence should swing the sword.
-        </div>
-      </div>
-    </div>
-
-    <div class="message">
-      <img class="avatar" src="./assets/img/khaleesi.png" alt="Avatar" />
-      <div class="message-content">
-        <div>
-          <span class="sender">khaleesi</span>
-          <span class="timestamp">01:00 AM</span>
-        </div>
-        <div class="message-text">
-          The next time you raise a hand to me will be the last time you have hands!
-        </div>
-      </div>
-    </div>
-
-    <div class="message">
-      <img class="avatar" src="./assets/img/cersei.png" alt="Avatar" />
-      <div class="message-content">
-        <div>
-          <span class="sender">cersei</span>
-          <span class="timestamp">02:00 AM</span>
-        </div>
-        <div class="message-text">
-          When you play the game of thrones, you win or you die.
-        </div>
-      </div>
-    </div>
-
-    <div class="message">
-      <img class="avatar" src="./assets/img/tyrion.png" alt="Avatar" />
-      <div class="message-content">
-        <div>
-          <span class="sender">tyrion</span>
-          <span class="timestamp">03:00 AM</span>
-        </div>
-        <div class="message-text">
-          The mad king did as he liked, has your uncle Jaime ever told you what happened to him?
-        </div>
-      </div>
-    </div>
-
-    <div class="message">
-      <img class="avatar" src="./assets/img/jaqenhghar.png" alt="Avatar" />
-      <div class="message-content">
-        <div>
-          <span class="sender">jaqenhghar</span>
-          <span class="timestamp">04:00 AM</span>
-        </div>
-        <div class="message-text">
-          A girl gives a man his own name?
-        </div>
-      </div>
-    </div>
+    <npa-message-list></npa-message-list>
 
   </main>
 
   <footer>
-    <form novalidate class="mdl-shadow--4dp">
-      <div class="input-message mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" id="message-input" autocomplete="off">
-        <label class="mdl-textfield__label" for="message-input">Message</label>
-      </div>
-      <button class="send-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">SEND</button>
-    </form>
+    <npa-input></npa-input>
   </footer>
 
 </div>

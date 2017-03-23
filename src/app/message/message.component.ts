@@ -1,12 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { Message } from './message';
 
 @Component({
   selector: 'npa-message',
   templateUrl: './message.component.html'
 })
 export class MessageComponent {
-  @Input() avatar: string;
-  @Input() sender: string;
-  @Input() timestamp: string;
-  @Input() content: string;
+  @Input() data: Message;
 }

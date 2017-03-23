@@ -1,12 +1,12 @@
 <div class="message">
-  <img class="avatar" [src]="avatar" alt="Avatar" />
+  <img class="avatar" [src]="data.sender.avatar" alt="Avatar" />
   <div class="message-content">
     <div>
-      <span class="sender">{{sender}}</span>
-      <span class="timestamp">{{timestamp}}</span>
+      <span class="sender">{{data.sender.nickname}}</span>
+      <span class="timestamp">{{data.timestamp}}</span>
     </div>
     <div class="message-text">
-      {{content}}
+      {{data.content}}
     </div>
   </div>
 </div>

@@ -8,6 +8,7 @@ import { MDLDirective } from './mdl.directive';
 import { MessageListComponent } from './message/message-list.component';
 import { MessageComponent } from './message/message.component';
 import { InputComponent } from './input/input.component';
+import { MessageService } from './message/message.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { InputComponent } from './input/input.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

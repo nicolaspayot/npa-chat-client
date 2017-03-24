@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { MESSAGES } from './messages.data';
+import 'rxjs/add/operator/map';
 import { Message } from './message';
+import { API_URL } from '../constants';
 
 @Injectable()
 export class MessageService {
+  constructor(private http: Http) {}
+
   getMessages(): Observable<Message[]> {
-    return Observable.of(MESSAGES);
+    return this.http.get(`${API_URL}/messages`)
+      .map((response: Response) => response.json());
   }
 }

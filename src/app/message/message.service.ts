@@ -13,4 +13,8 @@ export class MessageService {
     return this.http.get(`${API_URL}/messages`)
       .map((response: Response) => response.json());
   }
+
+  send(message: string): Observable<any> {
+    return this.http.post(`${API_URL}/messages`, { message });
+  }
 }

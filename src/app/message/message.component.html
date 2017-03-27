@@ -3,7 +3,7 @@
   <div class="message-content">
     <div>
       <span class="sender">{{data.sender.nickname}}</span>
-      <span class="timestamp">{{data.timestamp}}</span>
+      <span class="timestamp">{{data.timestamp | date:'hh:mm a'}}</span>
     </div>
     <div class="message-text">
       {{data.content}}

@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { MessageService } from '../message/message.service';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'npa-input',
@@ -7,11 +6,10 @@ import { MessageService } from '../message/message.service';
 })
 export class InputComponent {
   message = '';
-
-  constructor(private messageService: MessageService) {}
+  @Output() onSend = new EventEmitter<string>();
 
   sendMessage() {
-    this.messageService.send(this.message).subscribe();
+    this.onSend.emit(this.message);
     this.message = '';
   }
 }

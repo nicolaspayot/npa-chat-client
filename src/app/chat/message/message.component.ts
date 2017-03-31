@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Message } from './message';
-import { HOST_URL } from '../constants';
+import { HOST_URL } from '../../constants';
 
 @Component({
   selector: 'npa-message',

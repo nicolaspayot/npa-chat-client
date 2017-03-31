@@ -2,18 +2,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { MDLDirective } from './mdl.directive';
-import { MessageListComponent } from './message/message-list.component';
-import { MessageComponent } from './message/message.component';
-import { InputComponent } from './input/input.component';
-import { MessageService } from './message/message.service';
+import { LoginComponent } from './login/login.component';
+import { ChatComponent } from './chat/chat.component';
+import { MessageListComponent } from './chat/message/message-list.component';
+import { MessageComponent } from './chat/message/message.component';
+import { InputComponent } from './chat/input/input.component';
+import { MessageService } from './chat/message/message.service';
+import { routes } from './app.routing';
 
 @NgModule({
   declarations: [
     AppComponent,
     MDLDirective,
+    LoginComponent,
+    ChatComponent,
     MessageListComponent,
     MessageComponent,
     InputComponent
@@ -21,7 +27,8 @@ import { MessageService } from './message/message.service';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

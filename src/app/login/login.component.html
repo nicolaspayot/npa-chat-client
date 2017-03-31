@@ -1,0 +1,27 @@
+<div mdl class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title">Welcome to NPA chat</span>
+      <div class="mdl-layout-spacer"></div>
+    </div>
+  </header>
+
+  <main class="mdl-layout__content login">
+    <form>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="nickname-input" autocomplete="off"
+          #nickname
+          (input)="setNickname($event.target.value)">
+        <label class="mdl-textfield__label" for="nickname-input">Choose a nickname</label>
+      </div>
+      <button class="send-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+        [disabled]="!nickname.value"
+        (click)="$event.preventDefault()"
+        routerLink="chat">
+        START
+      </button>
+    </form>
+  </main>
+
+</div>

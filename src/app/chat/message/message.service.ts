@@ -4,10 +4,12 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import * as io from 'socket.io-client';
 import { Message } from './message';
-import { HOST_URL, API_URL } from '../constants';
+import { HOST_URL, API_URL } from '../../constants';
 
 @Injectable()
 export class MessageService {
+  nickname: string;
+
   constructor(private http: Http) {}
 
   getMessages(): Observable<Message[]> {
@@ -16,7 +18,7 @@ export class MessageService {
   }
 
   send(message: string): Observable<any> {
-    return this.http.post(`${API_URL}/messages`, { message });
+    return this.http.post(`${API_URL}/messages`, { message, nickname: this.nickname });
   }
 
   onNewMessage(): Observable<Message> {

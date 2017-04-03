@@ -1,28 +1,44 @@
-# NpaChatClient
+# npa-chat-client
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.4.
+L'objectif de ce TP est de découvrir les concepts d'Angular en implémentant une application basique de chat. 5 étapes sont nécessaires pour obtenir un résultat fonctionnel. Une sixème étape (bonus) permet d'expérimenter le *router* d'Angular avec l'implémentation d'une fonctionnalité de saisie de pseudonyme.
 
-## Development server
+La correction de chaque étape est implémentée dans une branche `git` et vous permet à tout moment de repartir sur une base de code propre (`git checkout step-X`, avec X un chiffre de 1 à 6).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+L'application de démarrage pour le TP se trouve sur la branche `master`.
+- Récupérez le projet existant : `git clone https://github.com/nicolaspayot/npa-chat-client.git`
+- Installez les dépendances requises avec `npm install`
+- lancer le serveur de développement local avec `npm start`. Si tout se passe bien, vous devriez avoir accès à l'application web sur `http://localhost:4200`
 
-## Code scaffolding
+### Etape 1
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+Tout le code HTML se trouve pour l'instant dans le fichier `src/app/app.component.html`. La première étape consiste à mettre en place des composants pour simplifier ce template trop chargé.
+- Créez un composant `InputComponent` dans un fichier `src/app/input/input.component.ts`. Il contient le contenu de la balise `<footer>`.
+- Créez un composant `MessageListComponent` dans un fichier `src/app/message/message-list.component.ts`. Il contient le contenu de la balise `<main>` (la liste des messages à afficher).
+- Enfin, créez un composant `MessageComponent` dans un fichier `src/app/message/message.component.ts`. Il contient le contenu de chaque message, c'est à dire la balise `<div class="message">`. Ce composant va être utilisé autant de fois qu'il y a de messages. Il doit donc pouvoir recevoir des données en entrée (`@Input()`). Ces propriétés sont les suivantes : `avatar`, `sender`, `timestamp`, `content`.
 
-## Build
+N'oubliez pas d'importer et déclarer (tableau `declarations`) tous ces composants dans le module principal de l'application, le fichier `src/app.module.ts`.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+### Etape 2
 
-## Running unit tests
+La deuxième étape consiste à retirer du HTML le contenu des messages en dur pour créer une liste sur laquelle nous allons itérer.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Utilisez le contenu de la liste [ici](https://gist.github.com/nicolaspayot/f090c27d671f0304966d10caea75a679) pour créer un fichier `src/app/message/messages.data.ts`.
+- Vous remarquerez que la liste est typée : `Message[]`. Créez un fichier `src/app/message/message.ts`. Il contient une interface `Message` (exportée) et une interface `Sender` (interne).
+- Créez un service `MessageService` dans un fichier `src/app/message/message.service.ts`, dont le rôle est de retourner la liste des messages dans une méthode `getMessages()`. Cette méthode retourne un `Observable` sur cette liste via `Observable.of(MESSAGES)`. Un `Observable` s'importe depuis `'rxjs/Rx'`. En retournant directement un `Observable`, nous n'aurons pas besoin de modifier l'implémentation du composant `MessageListComponent` quand `MessageService` utilisera le service `Http`, à la prochaine étape.
 
-## Running end-to-end tests
+ `MessageService` va être injecté et utilisé par `MessageListComponent`. N'oubliez pas de configurer l'injecteur de ce service dans le module principal de l'application (tableau `providers`).
+- Déclarez une variable `messages` dans `MessageListComponent` pour stocker la liste des messages du service. Utilisez la méthode `ngOnInit() { ... }` (nécessité d'implémenter l'interface `OnInit`) pour souscrire à la méthode `getMessages()` et instantier la liste.
+- Utilisez la directive `ngFor` sur la balise `<npa-message>` dans le template HTML de `MessageListComponent` pour afficher chaque message.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+Maintenant que les messages se trouvent dans une liste, vous pouvez simplifier le composant `MessageComponent` en remplaçant ses propriétés par une seul et unique propriété (`data` par exemple), qui contiendra chaque objet *message* au complet.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+
+
+
+
+
+
+

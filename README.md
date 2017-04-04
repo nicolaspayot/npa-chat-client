@@ -7,7 +7,7 @@ La correction de chaque étape est implémentée dans une branche `git` et vous 
 L'application de démarrage pour le TP se trouve sur la branche `master`.
 - Récupérez le projet existant : `git clone https://github.com/nicolaspayot/npa-chat-client.git`
 - Installez les dépendances requises avec `npm install`
-- lancer le serveur de développement local avec `npm start`. Si tout se passe bien, vous devriez avoir accès à l'application web sur `http://localhost:4200`
+- Lancer le serveur de développement local avec `npm start`. Si tout se passe bien, vous devriez avoir accès à l'application web sur `http://localhost:4200` :metal:
 
 ### Etape 1
 
@@ -27,10 +27,18 @@ La deuxième étape consiste à retirer du HTML le contenu des messages en dur p
 - Créez un service `MessageService` dans un fichier `src/app/message/message.service.ts`, dont le rôle est de retourner la liste des messages dans une méthode `getMessages()`. Cette méthode retourne un `Observable` sur cette liste via `Observable.of(MESSAGES)`. Un `Observable` s'importe depuis `'rxjs/Rx'`. En retournant directement un `Observable`, nous n'aurons pas besoin de modifier l'implémentation du composant `MessageListComponent` quand `MessageService` utilisera le service `Http`, à la prochaine étape.
 
  `MessageService` va être injecté et utilisé par `MessageListComponent`. N'oubliez pas de configurer l'injecteur de ce service dans le module principal de l'application (tableau `providers`).
-- Déclarez une variable `messages` dans `MessageListComponent` pour stocker la liste des messages du service. Utilisez la méthode `ngOnInit() { ... }` (nécessité d'implémenter l'interface `OnInit`) pour souscrire à la méthode `getMessages()` et instantier la liste.
-- Utilisez la directive `ngFor` sur la balise `<npa-message>` dans le template HTML de `MessageListComponent` pour afficher chaque message.
+- Déclarez une variable `messages` dans `MessageListComponent` pour stocker la liste des messages du service. Utilisez la méthode `ngOnInit() { ... }` (implémentez l'interface `OnInit`) pour souscrire à la méthode `getMessages()` et instantier la liste.
+- Utilisez la directive structurelle `*ngFor` sur la balise `<npa-message>` dans le template HTML de `MessageListComponent` pour afficher chaque message.
 
 Maintenant que les messages se trouvent dans une liste, vous pouvez simplifier le composant `MessageComponent` en remplaçant ses propriétés par une seul et unique propriété (`data` par exemple), qui contiendra chaque objet *message* au complet.
+
+### Etape 3
+
+Dans cette troisième étape, nous allons effectuer une requête `GET` avec le service `Http` pour récupérer la liste des messages sur un serveur REST. L'URL à utiliser est la suivante : https://npa-chat.herokuapp.com/api/messages.
+
+- Injectez le service `Http` dans `MessageService` (`@Injectable()`) et modifiez l'implémentation de la méthode `getMessages()` pour qu'elle retourne la liste des messages avec un appel à la méthode `get` de `Http`. Vous aurez besoin de l'operateur `map` (`import 'rxjs/add/operator/map'`) pour convertir un objet de type `Response` en liste de `Message`.
+- Supprimez le dossier `src/assets/img/` et la liste des messages en dur. Normalement, les messages doivent s'afficher mais sans les avatars. En effet, les liens retournés sont de la forme `img/avatar.png`. Il vous faut donc construire l'URL complète de récupération de l'avatar du message courant, dans le composant `MessageComponent`. Cette dernière a la forme suivante : https://npa-chat.herokuapp.com/img/avatar.png.
+
 
 
 

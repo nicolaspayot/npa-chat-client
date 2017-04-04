@@ -39,6 +39,16 @@ Dans cette troisième étape, nous allons effectuer une requête `GET` avec le s
 - Injectez le service `Http` dans `MessageService` (`@Injectable()`) et modifiez l'implémentation de la méthode `getMessages()` pour qu'elle retourne la liste des messages avec un appel à la méthode `get` de `Http`. Vous aurez besoin de l'operateur `map` (`import 'rxjs/add/operator/map'`) pour convertir un objet de type `Response` en liste de `Message`.
 - Supprimez le dossier `src/assets/img/` et la liste des messages en dur. Normalement, les messages doivent s'afficher mais sans les avatars. En effet, les liens retournés sont de la forme `img/avatar.png`. Il vous faut donc construire l'URL complète de récupération de l'avatar du message courant, dans le composant `MessageComponent`. Cette dernière a la forme suivante : https://npa-chat.herokuapp.com/img/avatar.png.
 
+### Etape 4
+
+La quatrième étape consiste à permettre l'envoi d'un message.
+
+- Utilisez le service `MessageService` pour implémenter une méthode `send(message)`. Cette méthode effectue une requête `POST` sur l'URL https://npa-chat.herokuapp.com/api/messages, avec pour paramètre un objet `{ message }` (*ES2015 shorthand notation*).
+- Utilisez le composant `InputComponent` pour récupérer le contenu du nouveau message (propriété `[value]`, évènement `(input)`, sur le champ de saisie). Ce composant ne va pas utiliser directement `MessageService`, mais émettre un événement (`@Output()`) à destination de son composant parent `AppComponent`.  C'est cet événement qui transmettra le nouveau message, à partir de l'événement `(click)` du bouton "SEND".
+- Enfin, dans le template HTML de `AppComponent`, interceptez l'événement provenant de `InputComponent` et envoyez le message reçu grâce à la méthode `send(message)` de `MessageService`.
+
+Votre message devrait s'afficher dans la liste après un rechargement de la page.
+
 
 
 

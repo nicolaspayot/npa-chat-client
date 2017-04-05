@@ -45,9 +45,43 @@ La quatrième étape consiste à permettre l'envoi d'un message.
 
 - Utilisez le service `MessageService` pour implémenter une méthode `send(message)`. Cette méthode effectue une requête `POST` sur l'URL https://npa-chat.herokuapp.com/api/messages, avec pour paramètre un objet `{ message }` (*ES2015 shorthand notation*).
 - Utilisez le composant `InputComponent` pour récupérer le contenu du nouveau message (propriété `[value]`, évènement `(input)`, sur le champ de saisie). Ce composant ne va pas utiliser directement `MessageService`, mais émettre un événement (`@Output()`) à destination de son composant parent `AppComponent`.  C'est cet événement qui transmettra le nouveau message, à partir de l'événement `(click)` du bouton "SEND".
-- Enfin, dans le template HTML de `AppComponent`, interceptez l'événement provenant de `InputComponent` et envoyez le message reçu grâce à la méthode `send(message)` de `MessageService`.
+- Enfin, dans le template HTML de `AppComponent`, interceptez l'événement provenant de `InputComponent` et envoyez le message reçu grâce à `MessageService`.
 
 Votre message devrait s'afficher dans la liste après un rechargement de la page.
+
+### Etape 5
+
+Cette étape va nous permettre d'afficher automatiquement chaque message envoyé, sans avoir besoin de rafraîchir la page. Pour cela, nous allons utiliser une WebSocket avec `socket.io`.
+
+- Installez les dépendances suivantes : 
+  - `npm install --save socket.io-client`
+  - `npm install --save @types/socket.io-client`
+- Importez le module `io` dans `MessageService` : `import * as io from 'socket.io-client';`.
+- Implémentez une méthode `onNewMessage()` dont le but est d'ouvir une connexion sur l'URL https://npa-chat.herokuapp.com, puis de retourner un `Observable` chargé d'émettre un événement à chaque fois qu'un nouveau message est reçu. Il faut ensuite "écoutez" l'événement `'messages/new'` avec cette `socket` et transmettre le message par l'`Observable` :
+
+```typescript
+onNewMessage(): Observable<Message> {
+  const socket = io.connect(HOST_URL);
+  return Observable.create(observer => {
+    socket.on('messages/new', message => observer.next(message));
+    return () => socket.disconnect();
+  });
+}
+```
+
+C'est au composant `MessageListComponent` que revient la charge d'incrémenter la liste des messages avec le nouveau message reçu : `this.messageService.onNewMessage().subscribe(...)`.
+
+Comme vous pouvez le remarquer, l'écran qui contient la liste des messages ne scroll pas automatiquement vers le bas à chaque nouveau message, ce qui n'est pas idéal. Pour effectuer cette tâche, vous pouvez utiliser la méthode suivante :
+
+```typescript
+scrollToBottom() {
+  const parent = this.elementRef.nativeElement.parentNode;
+  setTimeout(() => {
+    parent.scrollTop = parent.scrollHeight;
+  });
+}
+```
+N'oubliez pas d'importer et injecter `ElementRef` dans le composant. Appelez cette méthode à chaque fois que la liste des messages est incrémentée.
 
 
 

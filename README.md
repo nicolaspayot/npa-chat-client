@@ -83,6 +83,22 @@ scrollToBottom() {
 ```
 N'oubliez pas d'importer et injecter `ElementRef` dans le composant. Appelez cette méthode à chaque fois que la liste des messages est incrémentée.
 
+### Etape 6 (bonus)
+
+L'objectif de la dernière étape est d'utiliser le *router* d'Angular. Pour cela, nous allons implémenter une fonctionnalité de saisie de pseudonyme afin que chaque utilisateur puisse identifier ses messages.
+
+- Commencez par déplacer les dossiers `input`, et `message` dans un dossier `src/app/chat`.
+- Créez un composant `ChatComponent` dans un fichier `src/app/chat/chat.component.ts`. Le template HTML associé contient maintenant le contenu du template HTML du composant principal.
+- Créez ensuite un composant `LoginComponent` dans un fichier `src/app/login/login.component.ts`. Le template HTML à associer se trouve [ici](https://gist.github.com/nicolaspayot/2ef0632d328c1b5ea3b09857e4940a5c).
+- Configurez les routes de l'application dans un fichier `src/app/app.routing.ts` pour que l'URL de base (`''`) affiche la vue de login et l'URL `'/chat'` la vue de saisie des messages. Le template HTML du composant principal ne contient plus que la balise `<router-outlet></router-outlet>`.
+
+Il faut maintenant récupérer le pseudonyme de l'utilisateur et l'associer à chaque message saisi.
+
+- Utilisez le composant `LoginComponent` pour récupérer le contenu du champ `nickname-input` (événement `(input)`). Vous pouvez utiliser le service `MessageService` pour y stocker la valeur de ce champ.
+- Le bouton "START" redirige l'utilisateur sur la vue en charge de la saisie des messages (`routerLink`).
+- Enfin, modifier l'implémentation de la méthode `send` du service `MessageService` pour envoyer le pseudonyme de l'utilisateur (paramètre `nickname`) avec son message.
+
+Vous ne devriez plus être des `johndoe` :wink:
 
 
 

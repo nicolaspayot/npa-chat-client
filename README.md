@@ -1,13 +1,13 @@
 # npa-chat-client
 
-L'objectif de ce TP est de découvrir les concepts d'Angular en implémentant une application basique de chat. 5 étapes sont nécessaires pour obtenir un résultat fonctionnel. Une sixème étape (bonus) permet d'expérimenter le *router* d'Angular avec l'implémentation d'une fonctionnalité de saisie de pseudonyme.
+L'objectif de cet atelier est de découvrir les concepts d'Angular en implémentant une application basique de chat. 5 étapes sont nécessaires pour obtenir un résultat fonctionnel. Une sixème étape (bonus) permet d'expérimenter le *router* d'Angular avec l'implémentation d'une fonctionnalité de saisie de pseudonyme.
 
 La correction de chaque étape est implémentée dans une branche `git` et vous permet à tout moment de repartir sur une base de code propre (`git checkout step-X`, avec X un chiffre de 1 à 6).
 
-L'application de démarrage pour le TP se trouve sur la branche `master`.
+L'application de démarrage se trouve sur la branche `master`.
 - Récupérez le projet existant : `git clone https://github.com/nicolaspayot/npa-chat-client.git`
-- Installez les dépendances requises avec `npm install`
-- Lancer le serveur de développement local avec `npm start`. Si tout se passe bien, vous devriez avoir accès à l'application web sur `http://localhost:4200` :metal:
+- Installez les dépendances requises avec `npm install` ou `yarn`
+- Lancer le serveur de développement local avec `npm start` ou `yarn start`. Si tout se passe bien, vous devriez avoir accès à l'application web sur `http://localhost:4200` :metal:
 
 ### Etape 1
 

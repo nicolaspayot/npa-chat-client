@@ -29,6 +29,9 @@ La deuxième étape consiste à retirer du HTML le contenu des messages en dur p
  `MessageService` va être injecté et utilisé par `MessageListComponent`. N'oubliez pas de configurer l'injecteur de ce service dans le module principal de l'application (tableau `providers`).
 - Déclarez une variable `messages` dans `MessageListComponent` pour stocker la liste des messages du service. Utilisez la méthode `ngOnInit() { ... }` (implémentez l'interface `OnInit`) pour souscrire à la méthode `getMessages()` et instantier la liste.
 - Utilisez la directive structurelle `*ngFor` sur la balise `<npa-message>` dans le template HTML de `MessageListComponent` pour afficher chaque message.
+```javascript
+<npa-message *ngFor="let msg of messages" ...></npa-message>
+```
 
 Maintenant que les messages se trouvent dans une liste, vous pouvez simplifier le composant `MessageComponent` en remplaçant ses propriétés par une seul et unique propriété (`data` par exemple), qui contiendra chaque objet *message* au complet.
 
